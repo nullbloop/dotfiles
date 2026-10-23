@@ -54,43 +54,78 @@ To apply these configurations, you must symlink the folders from this repository
 ln -s ~/dotfiles/<folder-name> ~/.config/<folder-name>
 ```
 
-## Features
+## Highlights & Features
 
-Here is a breakdown of the custom configurations and features included for each package in this repository.
+### Niri & Noctalia (Compositor & UI)
+- **Modular Configuration:** Niri configs are split into numbered files (e.g., `10-input`, `20-layout`, `70-binds`) for easy navigation.
+- **Seamless Integration:** Bound `Super+E` to launch Yazi, and `Super+W` for Zen Browser.
+- **Material You Theming:** Noctalia handles the bar, launcher, and lock screen, while Matugen extracts colors from your wallpaper and applies them system-wide.
 
-### Niri
-- **Modular Configuration:** Split into numbered files (e.g., `10-input`, `20-layout`, `70-binds`) for easy navigation.
-- **Seamless Integration:** Bound `Super+E` to launch Yazi inside Kitty, and `Super+W` for Zen Browser.
-- **Polkit & Keyring:** Auto-starts GNOME Keyring and Polkit for graphical authentication.
-
-### Noctalia & Matugen (UI & Theming)
-- **Material You (Dynamic Theming):** Matugen extracts colors from your current wallpaper and generates matching color schemes for Kitty, GTK, Neovim, and Fastfetch.
-- **Quickshell UI:** Noctalia handles the top bar, launcher, notification daemon, and lock screen.
-
-### Kitty (Terminal)
-- **Native Drag & Drop:** Supports Yazi's OSC 72 protocol, allowing you to drag files directly from the terminal into Discord or WhatsApp.
-- **Scrollback Fix:** Custom `clear` alias ensures the scrollback buffer is completely wiped.
-
-### Fish (Shell)
-- **Yazi Wrapper:** Includes a custom `y` function that tracks the directory you navigate to inside Yazi and automatically `cd`s your terminal to that location when you quit.
-- **Prompt:** Starship prompt with custom Material You colors.
-
-### Neovim (Editor)
-- **File Management:** Deeply integrated with `yazi.nvim` to open floating file managers, and `neo-tree` for a traditional sidebar.
-- **LSP & Autocomplete:** Full LSP support via Mason, `nvim-cmp`, and Treesitter.
-- **Java Ready:** Includes a custom `<leader>rj` keybind to instantly compile and run the current Java file.
-- **Markdown Preview:** Renders Markdown natively in Neovim with GitHub-style overlays, plus a live browser preview via `markdown-preview.nvim` (`<Space>mp`).
-- **SSH Safe:** Configured `OSC 52` clipboard support to prevent Neovim from crashing or lagging when yanking text over SSH.
-- **UI:** Tiny Inline Diagnostics, Trouble, and Catppuccin Mocha theme.
-
-### Yazi (File Manager)
-- **Vim-Style Keybinds:** Mirrors the Neovim workflow (using `<Space>` as the leader key).
-- **Cloud & Device Mounting:** Integrated with `rclone` (for cloud drives) and `gvfs` (for mounting USB drives and Android phones).
-- **Content Previews:** Uses `mediainfo` and `ffmpegthumbnailer` to show video thumbnails, audio metadata, and code previews instantly.
-- **Smart Operations:** `smart-enter` (open file or enter dir with one key) and `smart-paste` (pastes directly into hovered directories).
+### Kitty & Fish (Terminal & Shell)
+- **Native Drag & Drop:** Kitty supports Yazi's OSC 72 protocol, letting you drag files directly from the terminal to other apps.
+- **Yazi Wrapper:** A custom `y` function in Fish automatically changes your terminal's directory to match wherever you navigated inside Yazi when you quit.
 
 ### Fastfetch & Misc
 - **System Info:** Fastfetch displays a beautiful Material You-colored logo and system specs on terminal startup.
 - **XDG Defaults:** Managed `mimeapps.list` to ensure Yazi, Zen, and MPV are the default applications for their respective file types.
 
+---
 
+<details>
+<summary><b>Click to view the Neovim Plugin list</b></summary>
+<br>
+
+**UI & Aesthetics**
+- `catppuccin/nvim`: The main theme (Mocha flavor).
+- `HiPhish/rainbow-delimiters.nvim`: Colorizes matching brackets.
+- `lukas-reineke/indent-blankline.nvim`: Adds vertical lines for indentation.
+- `nvim-treesitter/nvim-treesitter-context`: Pins function/class definitions to the top of the screen when scrolling.
+- `MeanderingProgrammer/render-markdown.nvim`: Renders Markdown natively with GitHub-style overlays.
+- `iamcco/markdown-preview.nvim`: Opens a live GitHub-style preview in the browser.
+- `folke/which-key.nvim`: Pops up a menu showing available keybinds.
+- `folke/trouble.nvim`: A beautiful list viewer for diagnostics and LSP references.
+- `rachartier/tiny-inline-diagnostic.nvim`: Replaces default LSP errors with modern inline text.
+
+**Navigation & Files**
+- `nvim-neo-tree/neo-tree.nvim`: Traditional file explorer sidebar (configured to show hidden files).
+- `nvim-telescope/telescope.nvim`: Fuzzy finder for files, buffers, and live grep.
+- `mikavilpas/yazi.nvim`: Integrates Yazi as a floating file manager inside Neovim.
+
+**LSP & Autocompletion**
+- `williamboman/mason.nvim`: Package manager for LSPs, linters, and formatters.
+- `neovim/nvim-lspconfig`: Configures the native Neovim LSP client.
+- `hrsh7th/nvim-cmp`: Autocompletion engine.
+- `windwp/nvim-autopairs`: Automatically closes brackets and quotes.
+- `echasnovski/mini.surround`: Quickly add/change/delete surrounding characters.
+
+**Syntax & Folding**
+- `nvim-treesitter/nvim-treesitter`: The core syntax parsing engine.
+- `kevinhwang91/nvim-ufo`: Advanced code folding with Treesitter.
+
+**Formatting & Linting**
+- `stevearc/conform.nvim`: Runs formatters (Stylua, Black, Prettier, etc.) on save.
+- `mfussenegger/nvim-lint`: Runs linters (Ruff, ESLint, Luacheck) in the background.
+
+**Git & Utilities**
+- `lewis6991/gitsigns.nvim`: Shows Git diff signs in the gutter and allows hunk staging.
+- `mbbill/undotree`: Visualizes the undo history as a tree.
+- `folke/todo-comments.nvim`: Highlights keywords like `TODO` and `FIXME`.
+- `vyfor/cord.nvim`: Discord Rich Presence.
+- `azratul/live-share.nvim`: Real-time collaborative editing.
+
+</details>
+
+<details>
+<summary><b>Click to view the detailed Yazi Plugin list</b></summary>
+<br>
+
+- `smart-enter`: Opens files or enters directories using the same key (`l`).
+- `smart-paste`: Pastes files directly into the hovered directory without entering it.
+- `open-with-cmd`: Prompts for a custom command to open the selected file.
+- `toggle-pane`: Maximizes, minimizes, or hides the preview pane.
+- `git`: Shows Git file statuses in the file list.
+- `gvfs`: Mounts USB drives, MTP devices (Android), and network shares.
+- `rclone`: Mounts and manages cloud storage (Google Drive, etc.).
+- `mediainfo`: Shows detailed metadata and thumbnails for audio and video files in the preview pane.
+
+</details>
