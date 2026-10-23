@@ -1,0 +1,13 @@
+// ── Polkit authentication agent ───────────────────────────────
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
+// ── GNOME Keyring ─────────────────────────────────────────────
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
+spawn-at-startup "sh" "-c" "iw dev wlp3s0 set power_save off"
+
+// ── Output config (optional) ─────────────────────────────────
+// output "eDP-1" {
+//     mode "1920x1080@144.000"
+//     scale 1
+//     position x=0 y=0
+// }

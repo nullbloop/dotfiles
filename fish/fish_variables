@@ -1,0 +1,5 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export --path XDG_DATA_DIRS:/home/sillymamaco/\x2elocal/share/flatpak/exports/share\x1e/var/lib/flatpak/exports/share\x1e/usr/local/share\x1e/usr/share
+SETUVAR fish_color_autosuggestion:cfc3cd
+SETUVAR fish_user_paths:/home/sillymamaco/\x2espicetify\x1e/usr/lib/jvm/default\x2djdk/bin\x1e/home/sillymamaco/\x2ecargo/bin\x1e/home/sillymamaco/\x2elocal/bin\x1e/usr/local/bin

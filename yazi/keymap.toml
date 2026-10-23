@@ -1,0 +1,56 @@
+# ~/.config/yazi/keymap.toml
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+
+[mgr]
+prepend_keymap = [
+  # --- Space Leader (Mirrors your Neovim setup) ---
+  { on = [
+    " ",
+    "e",
+  ], run = "plugin smart-enter", desc = "Smart enter (open/enter)" },
+  { on = [
+    " ",
+    "p",
+  ], run = "plugin smart-paste", desc = "Smart paste (into hovered dir)" },
+  { on = [
+    " ",
+    "f",
+  ], run = "filter --interactive", desc = "Fuzzy filter files" },
+  { on = [
+    " ",
+    "g",
+  ], run = "plugin gvfs", desc = "Mount / unmount devices" },
+  { on = [
+    "d",
+  ], run = "remove", desc = "Delete file (to trash)" },
+  { on = [
+    " ",
+    "y",
+  ], run = "yank", desc = "Yank/copy files" },
+  { on = [
+    " ",
+    "m",
+  ], run = "plugin toggle-pane max-preview", desc = "Maximize/restore preview" },
+  { on = [
+    " ",
+    "s",
+  ], run = "shell 'dragon -x -i -T \"$@\"' --confirm", desc = "Drag & Drop (dragon fallback)" },
+
+  # --- Navigation (Vim-style) ---
+  { on = "l", run = "plugin smart-enter", desc = "Enter dir or open file" },
+
+  # --- Preview Control (like scrolling in Neovim) ---
+  { on = "<C-d>", run = "seek 10", desc = "Scroll preview down" },
+  { on = "<C-u>", run = "seek -10", desc = "Scroll preview up" },
+
+  # --- Direct file operations ---
+  { on = "y", run = "yank", desc = "Yank/copy" },
+  { on = "p", run = "plugin smart-paste", desc = "Smart paste" },
+
+  # --- "Open With" prompt (formerly the separate [[mgr.prepend_keymap]]) ---
+  { on = "O", run = "plugin open-with-cmd", desc = "Open with... (prompt for command)" },
+  { on = [
+    " ",
+    "r",
+  ], run = "plugin rclone", desc = "Rclone (Cloud storage)" },
+]

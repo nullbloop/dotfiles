@@ -1,0 +1,25 @@
+// Environment variables — Serpentinum native + your existing
+
+environment {
+    XDG_CURRENT_DESKTOP "Niri"
+    XDG_SESSION_TYPE "wayland"
+    XDG_SESSION_DESKTOP "Niri"
+     GTK_THEME "adw-gtk3-dark"
+
+    // Ozone/Wayland for Electron & Chromium apps
+    NIXOS_OZONE_WL "1"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+
+    // Qt apps use Wayland natively
+    QT_QPA_PLATFORM "wayland"
+
+    // Qt theming (keep your existing setup)
+    QT_QPA_PLATFORMTHEME "kde"
+    QT_STYLE_OVERRIDE "Darkly"
+
+    // Silence Quickshell D-Bus property logs
+    QT_LOGGING_RULES "quickshell.dbus.properties=false"
+
+    // Plasma menu prefix for KDE/Qt .desktop indexing
+    XDG_MENU_PREFIX "plasma-"
+}
