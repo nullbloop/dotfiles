@@ -1,2 +1,6 @@
 .DS_Store
 *.swp
+*.bak
+*.mine
+*.template
+fish/fish_variables
