@@ -3,7 +3,7 @@
 
 [mgr]
 prepend_keymap = [
-  # --- Space Leader (Mirrors your Neovim setup) ---
+  # --- Space Leader (Mirrors Neovim) ---
   { on = [
     " ",
     "e",
@@ -21,9 +21,6 @@ prepend_keymap = [
     "g",
   ], run = "plugin gvfs", desc = "Mount / unmount devices" },
   { on = [
-    "d",
-  ], run = "remove", desc = "Delete file (to trash)" },
-  { on = [
     " ",
     "y",
   ], run = "yank", desc = "Yank/copy files" },
@@ -35,22 +32,19 @@ prepend_keymap = [
     " ",
     "s",
   ], run = "shell 'dragon -x -i -T \"$@\"' --confirm", desc = "Drag & Drop (dragon fallback)" },
-
-  # --- Navigation (Vim-style) ---
-  { on = "l", run = "plugin smart-enter", desc = "Enter dir or open file" },
-
-  # --- Preview Control (like scrolling in Neovim) ---
-  { on = "<C-d>", run = "seek 10", desc = "Scroll preview down" },
-  { on = "<C-u>", run = "seek -10", desc = "Scroll preview up" },
-
-  # --- Direct file operations ---
-  { on = "y", run = "yank", desc = "Yank/copy" },
-  { on = "p", run = "plugin smart-paste", desc = "Smart paste" },
-
-  # --- "Open With" prompt (formerly the separate [[mgr.prepend_keymap]]) ---
-  { on = "O", run = "plugin open-with-cmd", desc = "Open with... (prompt for command)" },
   { on = [
     " ",
     "r",
   ], run = "plugin rclone", desc = "Rclone (Cloud storage)" },
+
+  # --- Navigation & File Operations ---
+  { on = "l", run = "plugin smart-enter", desc = "Enter dir or open file" },
+  { on = "d", run = "remove", desc = "Delete file (to trash)" },
+  { on = "y", run = "yank", desc = "Yank/copy" },
+  { on = "p", run = "plugin smart-paste", desc = "Smart paste" },
+  { on = "O", run = "plugin open-with-cmd", desc = "Open with... (prompt for command)" },
+
+  # --- Preview Scrolling ---
+  { on = "<C-d>", run = "seek 10", desc = "Scroll preview down" },
+  { on = "<C-u>", run = "seek -10", desc = "Scroll preview up" },
 ]
