@@ -1,13 +1,12 @@
 [Default Applications]
-inode/directory=Thunar.desktop
 image/jpeg=imv.desktop
 image/png=imv.desktop
 image/gif=imv.desktop
 video/mp4=mpv.desktop
 video/x-matroska=mpv.desktop
 video/webm=mpv.desktop
-x-scheme-handler/discord=vesktop.desktop
-application/octet-stream=foot.desktop
+x-scheme-handler/discord=equibop.desktop
+application/octet-stream=noop.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-904NW3.desktop
 x-scheme-handler/mid=userapp-Thunderbird-904NW3.desktop
 message/rfc822=userapp-Thunderbird-904NW3.desktop
@@ -26,9 +25,10 @@ application/x-extension-shtml=zen.desktop
 application/xhtml+xml=zen.desktop
 application/x-extension-xhtml=zen.desktop
 application/x-extension-xht=zen.desktop
+inode/directory=yazi.desktop
+application/pdf=onlyoffice-desktopeditors.desktop
 
 [Added Associations]
-application/octet-stream=foot.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-904NW3.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-904NW3.desktop;
 message/rfc822=userapp-Thunderbird-904NW3.desktop;

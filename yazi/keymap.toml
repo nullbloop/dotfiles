@@ -47,4 +47,12 @@ prepend_keymap = [
   # --- Preview Scrolling ---
   { on = "<C-d>", run = "seek 10", desc = "Scroll preview down" },
   { on = "<C-u>", run = "seek -10", desc = "Scroll preview up" },
+  { on = [
+    " ",
+    "a",
+  ], run = "create", desc = "Create a new file" },
+  { on = [
+    " ",
+    "A",
+  ], run = "create --dir", desc = "Create a new directory" },
 ]

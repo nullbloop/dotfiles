@@ -15,3 +15,8 @@ prepend_preloaders = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
   { mime = "application/{subrip,postscript,illustrator,dvb.ait,vnd.adobe.illustrator,eps}", run = "mediainfo" },
 ]
+[opener]
+edit_nvim = [{ run = 'nvim "$1"', block = true, desc = "Open in Neovim" }]
+
+#[open]
+#prepend_rules = [{ mime = "application/pdf", use = "edit_nvim" }]
