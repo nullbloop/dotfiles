@@ -39,6 +39,7 @@ opt.clipboard = "unnamedplus"
 opt.wrap = true
 opt.linebreak = true
 opt.breakindent = true
+opt.swapfile = false -- Prevents E325 swap file errors
 
 -- Global Diagnostics Config
 vim.diagnostic.config({
@@ -70,6 +71,34 @@ vim.keymap.set({ "n", "v", "o" }, "<A-k>", "{", { desc = "Previous paragraph" })
 vim.keymap.set("n", "<leader>m", "%", { desc = "Match bracket" })
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
+
+-- ===============================================
+-- TAB NAVIGATION
+-- ===============================================
+-- Create / close
+vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<cr>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
+
+-- Switch (Using H and L, which are effortless on PT keyboards)
+vim.keymap.set("n", "H", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+vim.keymap.set("n", "L", "<cmd>tabnext<cr>", { desc = "Next tab" })
+
+-- Alternative switch (if you prefer using the leader key)
+vim.keymap.set("n", "<leader>tj", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>tk", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>tl", "<cmd>tabnext #<cr>", { desc = "Last accessed tab" })
+
+-- Jump to tab by number (1-9) and last tab with 0
+for i = 1, 9 do
+	vim.keymap.set("n", "<leader>t" .. i, "<cmd>tabnext " .. i .. "<cr>",
+		{ desc = "Go to tab " .. i })
+end
+vim.keymap.set("n", "<leader>t0", "<cmd>tabnext $<cr>", { desc = "Go to last tab" })
+
+-- Move current tab left / right (Using comma and period, very easy on PT keyboards)
+vim.keymap.set("n", "<leader>t,", "<cmd>tabmove -1<cr>", { desc = "Move tab left" })
+vim.keymap.set("n", "<leader>t.", "<cmd>tabmove +1<cr>", { desc = "Move tab right" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -139,6 +168,7 @@ require("lazy").setup({
 		event = "VeryLazy",
 		config = function()
 			require("which-key").setup({ preset = "helix" })
+			require("which-key").add({ { "<leader>t", group = "Tabs" } })
 		end,
 	},
 
