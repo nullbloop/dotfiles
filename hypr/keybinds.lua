@@ -1,5 +1,4 @@
 -- ~/dotfiles/hypr/keybinds.lua
--- Keybinds migrated from niri (70-binds.kdl)
 
 local mainMod = "SUPER"
 
@@ -101,22 +100,26 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ipc .. "media previous"))
 -- Reload
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("hyprctl reload"))
 
--- Touchpad gestures (reliable replacement for mouse_down/mouse_up binds)
+-- Touchpad gestures
 -- 3-finger horizontal swipe = switch workspaces
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 -- Move window with SUPER + Left Click Drag
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 
--- (Optional) Resize window with SUPER + Right Click Drag
+-- Resize window with SUPER + Right Click Drag
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- keybinds.lua
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
--- Optional: 4-finger vertical swipe = toggle a special/scratchpad workspace
--- hl.gesture({ fingers = 4, direction = "down", action = "special", workspace_name = "scratch" })
--- DROPPED (no Hyprland equivalent):
---   Mod+Tab (overview) - needs hyprexpo plugin
---   Mod+Escape (shortcut inhibit)
---   Mod+Shift+V (switch floating/tiling focus)
---   Mod+R, Mod+-/+, Mod+Shift+-/+ (column width presets/resize)
---   Mod+Comma / Mod+Period (consume/expel)
+
+
+-- Toggle Communication overlay
+hl.bind(mainMod .. " + C", hl.dsp.workspace.toggle_special("comm"))
+
+-- Toggle Music/Mail overlay
+hl.bind(mainMod .. " + M", hl.dsp.workspace.toggle_special("music"))
+
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:comm" }))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.move({ workspace = "special:music" }))
+
+hl.gesture({ fingers = 4, direction = "down", action = "special", workspace_name = "comm" })

@@ -1,0 +1,10 @@
+[general]
+save_interval = 120      # seconds between auto-saves
+restore_on_start = true
+per_window_launch = true
+restore_geometry = true  # restores floating window positions
+restore_layout = true    # reconstructs tiling layouts (dwindle/master)
+
+[rules]
+# Ignore system windows that shouldn't be restored
+exclude = ["^xdg-desktop-portal.*", "^org\\.kde\\.polkit.*"]

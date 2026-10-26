@@ -1,7 +1,4 @@
 -- ~/dotfiles/hypr/hyprland.lua
--- Main Hyprland configuration (migrated from niri)
-
--- Generated Colors (Matugen)
 local ok, colors = pcall(require, "colors")
 if not ok then
 	colors = {
@@ -10,7 +7,7 @@ if not ok then
 	}
 end
 
--- Environment Variables (from 40-environment.kdl)
+-- Environment Variables
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
@@ -23,7 +20,7 @@ hl.env("QT_STYLE_OVERRIDE", "Darkly")
 hl.env("QT_LOGGING_RULES", "quickshell.dbus.properties=false")
 hl.env("XDG_MENU_PREFIX", "plasma-")
 
--- Cursor theme (from 10-input-and-cursor.kdl)
+-- Cursor theme
 hl.env("XCURSOR_THEME", "catppuccin-mocha-pink-cursors")
 hl.env("XCURSOR_SIZE", "24")
 
@@ -34,10 +31,10 @@ hl.config({
 		repeat_delay = 250,
 		repeat_rate = 50,
 		follow_mouse = 1,
-		accel_profile = "flat", -- general input, NOT touchpad
-		natural_scroll = true, -- general input (applies to mouse too)
+		accel_profile = "flat",
+		natural_scroll = true,
 		touchpad = {
-			tap_to_click = true, -- was "tap"
+			tap_to_click = true,
 			natural_scroll = true,
 			clickfinger_behavior = true,
 		},
@@ -56,12 +53,12 @@ hl.monitor({
 	scale = 1,
 })
 
--- General appearance (from 20-layout-and-overview.kdl + noctalia.kdl)
+-- General appearance
 hl.config({
 	general = {
 		gaps_in = 5,
 		gaps_out = 10,
-		border_size = 0, -- niri had borders off; set to 2 to use matugen colors
+		border_size = 0,
 		col = {
 			active_border = colors.active_border,
 			inactive_border = colors.inactive_border,
@@ -97,7 +94,7 @@ hl.config({
 	},
 })
 
--- Autostart (from 50-startup.kdl and 90-user-extra.kdl)
+-- Autostart
 hl.on("hyprland.start", function()
 	-- Noctalia Shell
 	hl.exec_cmd("noctalia")
@@ -127,7 +124,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprresume")
 end)
 
--- Window Rules (from 30-window-rules.kdl)
+-- Window Rules
 -- Inactive window opacity (tiled only)
 hl.window_rule({
 	match = { float = false },
@@ -151,7 +148,6 @@ hl.window_rule({
 	no_focus = true,
 	move = "10 10",
 })
-
 -- xembedsniproxy (invisible, no focus, no border, no shadow)
 hl.window_rule({
 	match = { class = "^(xembedsniproxy)$" },
@@ -162,6 +158,11 @@ hl.window_rule({
 	no_shadow = true,
 })
 
+hl.window_rule({ match = { class = "^(whatsie)$" }, workspace = "special:comm" })
+hl.window_rule({ match = { class = "^(equibop)$" }, workspace = "special:comm" })
+hl.window_rule({ match = { class = "^(thunderbird)$" }, workspace = "special:comm" })
+
+hl.window_rule({ match = { class = "^(Spotify)$" }, workspace = "special:music" })
 
 
 hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
