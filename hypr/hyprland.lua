@@ -170,3 +170,6 @@ hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 -- Load submodules
 require("animations")
 require("keybinds")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
