@@ -14,6 +14,7 @@
 #
 # Template manifest: templates.json (declares input/output paths)
 # Active t
+[config]
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path = '~/.config/kitty/colors-matugen.conf'
@@ -22,3 +23,7 @@ post_hook = 'pkill -SIGUSR1 kitty'
 input_path = '~/.config/matugen/templates/fastfetch-colors.sh'
 output_path = '~/.config/fastfetch/colors.sh'
 #emplates (processed on every wallpaper/color change):
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.lua'
+output_path = '~/.config/hypr/colors.lua'
+post_hook = 'hyprctl reload'
