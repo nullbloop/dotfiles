@@ -4,5 +4,7 @@
 *.mine
 *.template
 fish/fish_variables
+hypr/colors.lua
 hypr/colors.conf
 hypr/colors.conf
+fish/fish_variables
