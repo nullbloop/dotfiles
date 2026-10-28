@@ -123,3 +123,5 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:com
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.move({ workspace = "special:music" }))
 
 hl.gesture({ fingers = 4, direction = "down", action = "special", workspace_name = "comm" })
+
+hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("~/.local/bin/toggle-vnc.sh"))

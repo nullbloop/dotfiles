@@ -20,6 +20,7 @@ hl.env("QT_STYLE_OVERRIDE", "Darkly")
 hl.env("QT_LOGGING_RULES", "quickshell.dbus.properties=false")
 hl.env("XDG_MENU_PREFIX", "plasma-")
 
+
 -- Cursor theme
 hl.env("XCURSOR_THEME", "catppuccin-mocha-pink-cursors")
 hl.env("XCURSOR_SIZE", "24")
@@ -72,7 +73,7 @@ hl.config({
 	decoration = {
 		rounding = 16,
 		active_opacity = 1.0,
-		inactive_opacity = 0.9,
+		inactive_opacity = 1.0,
 		shadow = {
 			enabled = true,
 			range = 30,
@@ -113,24 +114,16 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd(
 		"sh -c 'systemctl --user start pipewire pipewire-pulse wireplumber; until wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | grep -q Volume; do sleep 0.3; done'")
 
-	-- Polkit authentication agent
-	hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-
 	-- GNOME Keyring
 	hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
 
 	-- WiFi powersave off
 	hl.exec_cmd("sh -c 'iw dev wlp3s0 set power_save off'")
-	hl.exec_cmd("hyprresume")
 end)
 
--- Window Rules
--- Inactive window opacity (tiled only)
-hl.window_rule({
-	match = { float = false },
-	opacity = "1.0 0.9",
-})
 
+
+-- Window Rules
 -- Picture-in-Picture (floating)
 hl.window_rule({
 	match = { title = "^(Picture-in-Picture)$" },
@@ -157,6 +150,9 @@ hl.window_rule({
 	border_size = 0,
 	no_shadow = true,
 })
+
+hl.workspace_rule({ workspace = "special:comm", persistent = true })
+hl.workspace_rule({ workspace = "special:music", persistent = true })
 
 hl.window_rule({ match = { class = "^(whatsie)$" }, workspace = "special:comm" })
 hl.window_rule({ match = { class = "^(equibop)$" }, workspace = "special:comm" })
