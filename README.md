@@ -1,4 +1,4 @@
-# sillymamaco's Dotfiles
+# npc's Dotfiles
 
 My personal Linux configuration. Built for speed, keyboard-centric workflows, and Material You theming.
 

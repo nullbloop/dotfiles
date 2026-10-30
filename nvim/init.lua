@@ -1,7 +1,8 @@
 -- ===============================================
 -- ENVIRONMENT & BOOTSTRAP
 -- ===============================================
-vim.env.PATH = "/usr/bin:/usr/local/bin:" .. vim.env.PATH
+local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+vim.env.PATH = mason_bin .. ":/usr/bin:/usr/local/bin:" .. vim.env.PATH
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
@@ -39,11 +40,12 @@ opt.clipboard = "unnamedplus"
 opt.wrap = true
 opt.linebreak = true
 opt.breakindent = true
-opt.swapfile = false -- Prevents E325 swap file errors
+opt.swapfile = false
+opt.undofile = true
 
 -- Global Diagnostics Config
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 	signs = true,
 	underline = true,
 	update_in_insert = false,
@@ -72,6 +74,10 @@ vim.keymap.set("n", "<leader>m", "%", { desc = "Match bracket" })
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
 
+-- Diagnostic navigation (Replaces bracket-based [d / ]d)
+vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+
 -- ===============================================
 -- TAB NAVIGATION
 -- ===============================================
@@ -80,9 +86,9 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<cr>", { desc = "Close tab" })
 vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 
--- Switch (Using H and L, which are effortless on PT keyboards)
-vim.keymap.set("n", "H", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
-vim.keymap.set("n", "L", "<cmd>tabnext<cr>", { desc = "Next tab" })
+-- Switch (Using gh/gl to preserve native H/L movements)
+vim.keymap.set("n", "gh", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+vim.keymap.set("n", "gl", "<cmd>tabnext<cr>", { desc = "Next tab" })
 
 -- Alternative switch (if you prefer using the leader key)
 vim.keymap.set("n", "<leader>tj", "<cmd>tabnext<cr>", { desc = "Next tab" })
@@ -96,7 +102,7 @@ for i = 1, 9 do
 end
 vim.keymap.set("n", "<leader>t0", "<cmd>tabnext $<cr>", { desc = "Go to last tab" })
 
--- Move current tab left / right (Using comma and period, very easy on PT keyboards)
+-- Move current tab left / right
 vim.keymap.set("n", "<leader>t,", "<cmd>tabmove -1<cr>", { desc = "Move tab left" })
 vim.keymap.set("n", "<leader>t.", "<cmd>tabmove +1<cr>", { desc = "Move tab right" })
 
@@ -109,6 +115,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	end,
+})
+
+-- ===============================================
+-- LANGUAGE SPECIFIC AUTOCMDS
+-- ===============================================
+-- Force Python to use spaces, overriding global tab setting
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.opt_local.expandtab = true
+		vim.opt_local.tabstop = 4
+		vim.opt_local.softtabstop = 4
+		vim.opt_local.shiftwidth = 4
 	end,
 })
 
@@ -289,7 +309,7 @@ require("lazy").setup({
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"lua_ls", "pyright", "ts_ls", "rust_analyzer", "clangd", "jdtls",
+					"lua_ls", "pyright", "ts_ls", "clangd", "jdtls",
 					"bashls", "html", "cssls", "jsonls", "yamlls", "taplo", "tinymist",
 				},
 				automatic_installation = false,
@@ -313,7 +333,10 @@ require("lazy").setup({
 	-- LSPConfig
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "williamboman/mason-lspconfig.nvim" },
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+			"hrsh7th/cmp-nvim-lsp"
+		},
 		config = function()
 			vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
@@ -331,7 +354,7 @@ require("lazy").setup({
 			})
 
 			vim.lsp.enable({
-				"lua_ls", "pyright", "ts_ls", "rust_analyzer", "clangd",
+				"lua_ls", "pyright", "ts_ls", "clangd",
 				"bashls", "html", "cssls", "jsonls", "yamlls", "taplo", "tinymist",
 			})
 		end,
@@ -363,6 +386,17 @@ require("lazy").setup({
 			-- Tell JDTLS to put compiled .class files HERE instead of a local "bin" folder
 			local output_dir = workspace_dir .. "/target/classes"
 
+			-- Fix: Ensure config_dir resolves to a string, not a table
+			local config_dirs = vim.fn.glob(mason_path .. "/packages/jdtls/config_*", false, true)
+			local config_dir = config_dirs[1]
+
+			-- Only apply custom sourcePaths for Makefile projects (prevents Maven/Gradle breakage)
+			local is_makefile = vim.fn.filereadable(root_dir .. "/Makefile") == 1
+			local project_settings = is_makefile and {
+				sourcePaths = { "src" },
+				outputPath = output_dir,
+			} or nil
+
 			jdtls.start_or_attach({
 				cmd = {
 					"env",
@@ -374,15 +408,9 @@ require("lazy").setup({
 				settings = {
 					java = {
 						import = {
-							-- Prevents .classpath and .project from being created
 							generatesMetadataFilesAtProjectRoot = false,
 						},
-						project = {
-							-- Tells JDTLS that 'src' is the root for your packages
-							sourcePaths = { "src" },
-							-- Tells JDTLS to put compiled classes in the cache, NOT your folder
-							outputPath = output_dir,
-						},
+						project = project_settings,
 						saveActions = {
 							organizeImports = false,
 						},
@@ -396,7 +424,7 @@ require("lazy").setup({
 					workspace = workspace_dir,
 					bundles = vim.split(vim.fn.glob(mason_path .. "/packages/jdtls/plugins/*.jar"), "\n"),
 				},
-				configuration = vim.fn.glob(mason_path .. "/packages/jdtls/config_*"),
+				config_dir = config_dir,
 			})
 		end,
 	},
@@ -412,7 +440,7 @@ require("lazy").setup({
 			ts.setup()
 			ts.install({
 				"lua", "vim", "vimdoc", "query", "python", "javascript", "typescript",
-				"rust", "go", "c", "cpp", "java", "markdown", "markdown_inline", "html",
+				"c", "cpp", "java", "markdown", "markdown_inline", "html",
 				"bash", "yaml", "toml",
 			})
 			vim.api.nvim_create_autocmd("FileType", {
@@ -483,8 +511,6 @@ require("lazy").setup({
 				python = { "isort", "black" },
 				javascript = { "prettierd" },
 				typescript = { "prettierd" },
-				go = { "gofmt", "goimports" },
-				rust = { "rustfmt" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				sh = { "shfmt" },
@@ -540,8 +566,15 @@ require("lazy").setup({
 		dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "L3MON4D3/LuaSnip" },
 		config = function()
 			local cmp = require("cmp")
+			require("luasnip").setup({})
+
 			cmp.setup({
 				completion = { completeopt = "menu,menuone,noselect" },
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = cmp.mapping.select_next_item(),
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
@@ -586,8 +619,9 @@ require("lazy").setup({
 				on_attach = function(bufnr)
 					local gs = package.loaded.gitsigns
 					local function map(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc }) end
-					map("n", "<C-j>", gs.next_hunk, "Next git hunk")
-					map("n", "<C-k>", gs.prev_hunk, "Previous git hunk")
+					-- Ditch brackets: Use leader + hj/hk for hunk navigation
+					map("n", "<leader>hj", gs.next_hunk, "Next git hunk")
+					map("n", "<leader>hk", gs.prev_hunk, "Previous git hunk")
 					map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
 					map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
 					map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
@@ -607,14 +641,14 @@ require("lazy").setup({
 	-- Todo Comments
 	{ "folke/todo-comments.nvim", event = { "BufReadPre", "BufNewFile" }, opts = {} },
 
-	-- Cord
+	-- Cord:
 	{ "vyfor/cord.nvim",          build = ":Cord update",                 event = "VeryLazy" },
 
 	-- Live Share
 	{
 		"azratul/live-share.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "jbyuki/instant.nvim" },
-		config = function() require("live-share").setup({ username = "sillymamaco" }) end,
+		config = function() require("live-share").setup({ username = "npc" }) end,
 	},
 }, { rocks = { enabled = false } })
 
@@ -633,7 +667,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 		vim.defer_fn(function()
 			vim.cmd("source $MYVIMRC")
 			vim.notify("init.lua reloaded & LSPs restarted!", vim.log.levels.INFO)
-			vim.cmd("doautocmd FileType")
+			vim.cmd("doautocmd FileType " .. vim.bo.filetype)
 		end, 500)
 	end,
 })

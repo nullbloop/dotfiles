@@ -119,9 +119,12 @@ hl.bind(mainMod .. " + C", hl.dsp.workspace.toggle_special("comm"))
 -- Toggle Music/Mail overlay
 hl.bind(mainMod .. " + M", hl.dsp.workspace.toggle_special("music"))
 
+hl.bind(mainMod .. " + G", hl.dsp.workspace.toggle_special("discord"))
+
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.move({ workspace = "special:comm" }))
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.move({ workspace = "special:music" }))
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.window.move({ workspace = "special:discord" }))
 
-hl.gesture({ fingers = 4, direction = "down", action = "special", workspace_name = "comm" })
+hl.gesture({ fingers = 4, direction = "down", action = "special", workspace_name = "discord" })
 
 hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("~/.local/bin/toggle-vnc.sh"))

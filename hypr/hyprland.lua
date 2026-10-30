@@ -57,9 +57,9 @@ hl.monitor({
 -- General appearance
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
-		border_size = 0,
+		gaps_in = 0,
+		gaps_out = 0,
+		border_size = 1,
 		col = {
 			active_border = colors.active_border,
 			inactive_border = colors.inactive_border,
@@ -153,10 +153,12 @@ hl.window_rule({
 
 hl.workspace_rule({ workspace = "special:comm", persistent = true })
 hl.workspace_rule({ workspace = "special:music", persistent = true })
+hl.workspace_rule({ workspace = "special:discord", persistent = true })
 
-hl.window_rule({ match = { class = "^(whatsie)$" }, workspace = "special:comm" })
-hl.window_rule({ match = { class = "^(equibop)$" }, workspace = "special:comm" })
-hl.window_rule({ match = { class = "^(thunderbird)$" }, workspace = "special:comm" })
+hl.window_rule({ match = { class = "^(elecwhat)$" }, workspace = "special:comm" })
+hl.window_rule({ match = { class = "^(org\\.mozilla\\.Thunderbird)$" }, workspace = "special:comm" })
+
+hl.window_rule({ match = { class = "^(equibop)$" }, workspace = "special:discord" })
 
 hl.window_rule({ match = { class = "^(Spotify)$" }, workspace = "special:music" })
 
