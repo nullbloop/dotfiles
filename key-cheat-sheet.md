@@ -1,144 +1,141 @@
-# Complete Neovim & Yazi Keymap Reference cause I'm super forgetfull
+# Complete Neovim & Yazi Keymap Reference
 
-**Global Leader Key:** `<Space>` (Mapped to `<leader>`)
+**Global Leader Key:** `Space`
 
-## Neovim (Global & Navigation)
-| Key | Action |
+## Native Vim Commands 
+| Press this | Action |
 | :--- | :--- |
-| `H` / `L` | Top / Bottom of screen |
-| `<A-j>` | Next paragraph `}` |
-| `<A-k>` | Previous paragraph `{` |
-| `<leader>m` | Match bracket `%` |
-| `<leader>dn` | Next Diagnostic |
-| `<leader>dp` | Previous Diagnostic |
-| `<leader>y` | Yank to system clipboard |
-| `<leader>Y` | Yank line to system clipboard |
+| `d` | Delete (e.g., `dd` for line, `dw` for word) |
+| `x` | Delete single character |
+| `p` | Paste |
+| `ggVG` | Select entire file |
+| `u` | Undo |
+| `Ctrl + r` | Redo |
+| `:w` | Save file |
+| `:q` | Quit |
+| `:wq` | Save and quit |
+
+## Neovim Custom 
+| Press this | Action |
+| :--- | :--- |
+| `Alt + j` | Next paragraph |
+| `Alt + k` | Previous paragraph |
+| `Space` then `m` | Match bracket |
+| `Space` then `dn` | Next Diagnostic |
+| `Space` then `dp` | Previous Diagnostic |
+| `Space` then `y` | Yank to system clipboard |
+| `Space` then `Y` | Yank line to system clipboard |
 
 ## Tabs
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
-| `<leader>tn` | New tab |
-| `<leader>tx` | Close tab |
-| `<leader>to` | Close *other* tabs |
+| `Space` then `tn` | New tab |
+| `Space` then `tx` | Close tab |
+| `Space` then `to` | Close *other* tabs |
 | `gh` | Previous tab |
 | `gl` | Next tab |
-| `<leader>tj` | Next tab |
-| `<leader>tk` | Previous tab |
-| `<leader>tl` | Go to last accessed tab |
-| `<leader>t1` – `<leader>t9` | Jump to tab 1–9 |
-| `<leader>t0` | Jump to last tab |
-| `<leader>t,` | Move tab left |
-| `<leader>t.` | Move tab right |
+| `Space` then `tj` | Next tab |
+| `Space` then `tk` | Previous tab |
+| `Space` then `tl` | Go to last accessed tab |
+| `Space` then `t1` – `t9` | Jump to tab 1–9 |
+| `Space` then `t0` | Jump to last tab |
+| `Space` then `t,` | Move tab left |
+| `Space` then `t.` | Move tab right |
 
 ## LSP & Code Actions
-*Note: These only apply when a language server is attached to the buffer.*
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
 | `gd` | Go to definition |
 | `K` | Hover documentation |
 | `gr` | Show references |
-| `<leader>rn` | Rename symbol |
-| `<leader>ca` | Code Action |
-| `<leader>fm` | Format buffer (Conform) |
+| `Space` then `rn` | Rename symbol |
+| `Space` then `ca` | Code Action |
+| `Space` then `cf` | Format buffer |
 
 ## Autocomplete (nvim-cmp)
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
-| `<Tab>` | Select next completion item |
-| `<S-Tab>` | Select previous completion item |
-| `<CR>` (Enter) | Confirm completion |
-
-## Text Editing (mini.surround)
-| Key | Action |
-| :--- | :--- |
-| `sa` | Add surrounding (e.g., `sa"` to wrap in quotes) |
-| `sd` | Delete surrounding |
-| `sr` | Replace surrounding |
-| `sf` / `sF` | Find surrounding (right / left) |
-| `sh` | Highlight surrounding |
-| `sn` | Update `n` lines in surrounding |
+| `Ctrl + Space` | **Manually trigger autocomplete** |
+| `Ctrl + e` | Abort/Cancel autocomplete |
+| `Tab` | Select next completion item |
+| `Shift + Tab` | Select previous completion item |
+| `Enter` | Confirm completion |
 
 ## Folds (nvim-ufo)
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
 | `zR` | Open all folds |
 | `zM` | Close all folds |
 
-## Plugin Shortcuts
-
-### Search & File Explorer
-| Key | Action |
+## Search & File Explorer
+| Press this | Action |
 | :--- | :--- |
-| `<leader>b` | Telescope: List open buffers |
-| `<leader>f` | Telescope: Find files |
-| `<leader>g` | Telescope: Live grep (search text) |
-| `<leader>e` | Toggle Neo-tree (file explorer) |
-| `<leader>o` | Focus Neo-tree |
-| `<leader>-` | Open Yazi at current file |
-| `<leader>cw` | Open Yazi in working directory |
-| `<c-up>` | Resume/Toggle Yazi (from Neovim) |
+| `Space` then `b` | Telescope: List open buffers |
+| `Space` then `f` | Telescope: Find files |
+| `Space` then `g` | Telescope: Live grep (search text) |
+| `Space` then `e` | Toggle Neo-tree (file explorer) |
+| `Space` then `o` | Focus Neo-tree |
+| `Space` then `-` | Open Yazi at current file |
+| `Space` then `cw` | Open Yazi in working directory |
+| `Ctrl + Up Arrow` | Resume/Toggle Yazi (from Neovim) |
 
-### Git (Gitsigns)
-| Key | Action |
+## Git (Gitsigns)
+| Press this | Action |
 | :--- | :--- |
-| `<leader>hj` | Next git hunk |
-| `<leader>hk` | Previous git hunk |
-| `<leader>hs` | Stage hunk |
-| `<leader>hr` | Reset hunk |
-| `<leader>hp` | Preview hunk |
-| `<leader>hb` | Blame line (full) |
+| `Space` then `hj` | Next git hunk |
+| `Space` then `hk` | Previous git hunk |
+| `Space` then `hs` | Stage hunk |
+| `Space` then `hr` | Reset hunk |
+| `Space` then `hp` | Preview hunk |
 
-### Diagnostics & Lists (Trouble)
-| Key | Action |
+## Diagnostics & Lists (Trouble)
+| Press this | Action |
 | :--- | :--- |
-| `<leader>xx` | Toggle all Diagnostics |
-| `<leader>xb` | Toggle Buffer Diagnostics |
-| `<leader>xs` | Toggle Symbols |
-| `<leader>xl` | Toggle LSP References |
-| `<leader>xq` | Toggle Quickfix List |
+| `Space` then `xx` | Toggle all Diagnostics (Workspace) |
+| `Space` then `xX` | Toggle Buffer Diagnostics |
+| `Space` then `cs` | Toggle Symbols |
 
-### Markdown & Typst
-| Key | Action |
+## Markdown & Typst
+| Press this | Action |
 | :--- | :--- |
-| `<leader>mr` | Toggle Render Markdown (in-buffer) |
-| `<leader>mp` | Markdown Preview (in browser) |
-| `<leader>tp` | Toggle Typst Preview |
-| `<leader>ts` | Sync Typst Preview cursor |
+| `Space` then `mr` | Toggle Render Markdown (in-buffer) |
+| `Space` then `mp` | Markdown Preview (in browser) |
+| `Space` then `tp` | Toggle Typst Preview |
+| `Space` then `ts` | Sync Typst Preview cursor |
 
-### Misc
-| Key | Action |
+## Misc
+| Press this | Action |
 | :--- | :--- |
-| `<leader>tc` | Toggle Treesitter Context |
-| `<leader>u` | Toggle Undotree |
+| `Space` then `tc` | Toggle Treesitter Context |
 
 ---
 
 ## Yazi (Terminal File Manager)
-**Leader Key in Yazi:** `<Space>` (Mirrors Neovim)
+**Leader Key in Yazi:** `Space`
 
 ### Navigation & View
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
 | `l` | Smart enter (open file / enter dir) |
-| `<Space>e` | Smart enter (open file / enter dir) |
-| `<Space>m` | Maximize/restore preview pane |
-| `<C-d>` | Scroll preview down |
-| `<C-u>` | Scroll preview up |
-| `<Space>f` | Fuzzy filter files |
+| `Space` then `e` | Smart enter (open file / enter dir) |
+| `Space` then `m` | Maximize/restore preview pane |
+| `Ctrl + d` | Scroll preview down |
+| `Ctrl + u` | Scroll preview up |
+| `Space` then `f` | Fuzzy filter files |
 
 ### File Operations
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
-| `y` / `<Space>y` | Yank/Copy files |
-| `p` / `<Space>p` | Smart paste (into hovered dir) |
+| `y` or `Space` then `y` | Yank/Copy files |
+| `p` or `Space` then `p` | Smart paste (into hovered dir) |
 | `d` | Delete file (to trash) |
 | `O` | Open with... (prompt for command) |
-| `<Space>a` | Create a new file |
-| `<Space>A` | Create a new directory |
+| `Space` then `a` | Create a new file |
+| `Space` then `A` | Create a new directory |
 
 ### Mounts, Remotes & Tools
-| Key | Action |
+| Press this | Action |
 | :--- | :--- |
-| `<Space>g` | Open mount manager |
-| `<Space>r` | Open an Rclone remote (prompts for name) |
-| `<Space>s` | Drag & Drop (`dragon` fallback) |
+| `Space` then `g` | Open mount manager |
+| `Space` then `r` | Open an Rclone remote (prompts for name) |
+| `Space` then `s` | Drag & Drop (`dragon` fallback) |
