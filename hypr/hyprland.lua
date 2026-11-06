@@ -128,11 +128,9 @@ end)
 hl.window_rule({
 	match = { title = "^(Picture-in-Picture)$" },
 	float = true,
+	pin = true,
 })
-hl.window_rule({
-	match = { class = "^(zen)$", title = "^(Picture-in-Picture)$" },
-	float = true,
-})
+
 
 -- Steam notification toasts
 hl.window_rule({

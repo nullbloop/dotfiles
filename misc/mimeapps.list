@@ -27,6 +27,7 @@ application/x-extension-xhtml=zen.desktop
 application/x-extension-xht=zen.desktop
 inode/directory=yazi.desktop
 application/pdf=onlyoffice-desktopeditors.desktop
+x-scheme-handler/stremio=stremio-enhanced.desktop
 
 [Added Associations]
 x-scheme-handler/mailto=userapp-Thunderbird-904NW3.desktop;

@@ -9,7 +9,12 @@ hl.bind(mainMod .. " + D", hl.dsp.window.fullscreen({ mode = "maximized", action
 hl.bind(mainMod .. " + A", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("hyprctl dispatch dpms off"))
-
+hl.bind(mainMod .. " + P", function()
+	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+	hl.dispatch(hl.dsp.window.pin({ action = "toggle" }))
+	hl.dispatch(hl.dsp.window.resize({ x = 640, y = 360, relative = false }))
+	hl.dispatch(hl.dsp.window.move({ x = 40, y = 40, relative = false }))
+end)
 -- Noctalia panels
 local ipc = "noctalia msg "
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
