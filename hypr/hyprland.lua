@@ -119,6 +119,7 @@ hl.on("hyprland.start", function()
 
 	-- WiFi powersave off
 	hl.exec_cmd("sh -c 'iw dev wlp3s0 set power_save off'")
+	hl.exec_once("gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'")
 end)
 
 
@@ -153,7 +154,7 @@ hl.workspace_rule({ workspace = "special:comm", persistent = true })
 hl.workspace_rule({ workspace = "special:music", persistent = true })
 hl.workspace_rule({ workspace = "special:discord", persistent = true })
 
-hl.window_rule({ match = { class = "^(elecwhat)$" }, workspace = "special:comm" })
+hl.window_rule({ match = { class = "io.github.tobagin.karere" }, workspace = "special:comm" })
 hl.window_rule({ match = { class = "^(org\\.mozilla\\.Thunderbird)$" }, workspace = "special:comm" })
 
 hl.window_rule({ match = { class = "^(equibop)$" }, workspace = "special:discord" })

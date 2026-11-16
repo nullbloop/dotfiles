@@ -75,7 +75,7 @@
     Categories=Utility;FileManager;
   '';
 
-  # 7. Set Yazi as the default application for opening folders
+  # 7. MIME Associations (Zen Browser & Yazi)
   xdg.mime.enable = true;
   xdg.mime.defaultApplications = {
     "text/html" = lib.mkForce "zen-beta.desktop";
@@ -83,8 +83,16 @@
     "x-scheme-handler/https" = lib.mkForce "zen-beta.desktop";
     "x-scheme-handler/about" = lib.mkForce "zen-beta.desktop";
     "x-scheme-handler/unknown" = lib.mkForce "zen-beta.desktop";
+    "inode/directory" = "yazi.desktop";
   };
 
-  # Ensure Yazi is available system-wide
+  # 8. Dark Mode Force (GTK & Qt)
+  environment.sessionVariables = {
+    GTK_THEME = "adw-gtk3-dark";
+    QT_STYLE_OVERRIDE = "adwaita-dark";
+    QT_QPA_PLATFORMTHEME = "gtk3";
+  };
+
+  # 9. Ensure Yazi is available system-wide
   environment.systemPackages = with pkgs; [ yazi ];
 }

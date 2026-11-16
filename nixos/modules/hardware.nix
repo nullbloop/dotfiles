@@ -8,7 +8,11 @@
   services.upower.enable = true;
   powerManagement.enable = true;
 
-  #
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+
   services.fstrim.enable = true;
 
   services.fwupd.enable = true;

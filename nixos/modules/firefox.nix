@@ -16,6 +16,9 @@
         Cryptomining = true;
         Fingerprinting = true;
       };
+      Preferences = {
+        "ui.systemUsesDarkTheme" = 1;
+      };
       # Disable Telemetry & Data Collection
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
