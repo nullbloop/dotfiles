@@ -1,0 +1,164 @@
+.
+├── README.md
+├── config.log
+├── fastfetch
+│   ├── colors.sh
+│   ├── config.jsonc
+│   └── config.jsonc.template
+├── fish
+│   ├── config.fish
+│   ├── fish_variables
+│   └── functions
+│       ├── tab.fish
+│       └── y.fish
+├── hypr
+│   ├── animations.lua
+│   ├── colors.lua
+│   ├── hyprland.lua
+│   ├── keybinds.lua
+│   └── noctalia.lua
+├── key-cheat-sheet.md
+├── kitty
+│   ├── colors-matugen.conf
+│   ├── colors.conf
+│   ├── kitty.conf
+│   └── themes
+│       └── noctalia.conf
+├── matugen
+│   ├── config.toml
+│   ├── templates
+│   │   ├── colors.json
+│   │   ├── fastfetch-colors.sh
+│   │   ├── firefox
+│   │   │   ├── materialfox.css
+│   │   │   └── pywalfox-colors.json
+│   │   ├── fuzzel
+│   │   │   └── fuzzel_theme.ini
+│   │   ├── gtk-3.0
+│   │   │   └── gtk.css
+│   │   ├── gtk-4.0
+│   │   │   └── gtk.css
+│   │   ├── hyprland-colors.lua
+│   │   ├── kde
+│   │   │   ├── color.txt
+│   │   │   └── kde-material-you-colors-wrapper.sh
+│   │   ├── kitty-colors.conf
+│   │   ├── steam
+│   │   │   └── millennium-material.css
+│   │   ├── terminals
+│   │   │   ├── alacritty.toml
+│   │   │   ├── foot.ini
+│   │   │   ├── ghostty.conf
+│   │   │   └── kitty.conf
+│   │   └── wallpaper.txt
+│   └── templates.json
+├── misc
+│   ├── mimeapps.list
+│   └── starship.toml
+├── nvim
+│   ├── init.lua
+│   └── lua
+│       ├── config
+│       │   ├── keymaps.lua
+│       │   ├── lsp-attach.lua
+│       │   └── options.lua
+│       ├── matugen.lua
+│       └── plugins
+│           ├── base16.lua
+│           ├── completion.lua
+│           ├── conform.lua
+│           ├── gitsigns.lua
+│           ├── lsp.lua
+│           ├── markdown.lua
+│           ├── neo-tree.lua
+│           ├── telescope.lua
+│           ├── treesitter.lua
+│           ├── trouble.lua
+│           ├── typst.lua
+│           ├── ufo.lua
+│           ├── ui.lua
+│           └── yazi.lua
+├── xdg-desktop-portal
+│   ├── hyprland-portals.conf
+│   ├── niri-portals.conf
+│   └── portals.conf
+├── xdg-desktop-portal-termfilechooser
+│   └── config
+└── yazi
+    ├── flavors
+    │   ├── catppuccin-mocha.yazi
+    │   │   ├── LICENSE
+    │   │   ├── LICENSE-tmtheme
+    │   │   ├── README.md
+    │   │   ├── flavor.toml
+    │   │   ├── preview.png
+    │   │   └── tmtheme.xml
+    │   └── noctalia.yazi
+    │       ├── flavor.toml
+    │       └── tmtheme.xml
+    ├── keymap.toml
+    ├── package.toml
+    ├── plugins
+    │   ├── git.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   ├── main.lua
+    │   │   └── types.lua
+    │   ├── gvfs.yazi
+    │   │   ├── GNOME_ONLINE_ACCOUNTS_GOA.md
+    │   │   ├── HEADLESS_WORKAROUND.md
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   ├── SECURE_SAVED_PASSWORD.md
+    │   │   ├── assets
+    │   │   │   ├── automount.sh
+    │   │   │   └── gnome-keyring-daemon.service
+    │   │   └── main.lua
+    │   ├── mediainfo.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   ├── adobe.lua
+    │   │   ├── assets
+    │   │   │   ├── 2025-02-15-09-14-23.png
+    │   │   │   ├── 2025-02-15-09-15-39.png
+    │   │   │   ├── 2025-02-15-16-51-11.png
+    │   │   │   └── 2025-02-15-16-52-39.png
+    │   │   ├── audio.lua
+    │   │   ├── const.lua
+    │   │   ├── image.lua
+    │   │   ├── main.lua
+    │   │   ├── none-media-preview.lua
+    │   │   ├── utils.lua
+    │   │   └── video.lua
+    │   ├── mount.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   ├── cross.lua
+    │   │   ├── main.lua
+    │   │   └── sudo.lua
+    │   ├── open-with-cmd.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── main.lua
+    │   ├── rclone.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   ├── main.lua
+    │   │   ├── ops.lua
+    │   │   └── rc.lua
+    │   ├── smart-enter.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── main.lua
+    │   ├── smart-paste.yazi
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── main.lua
+    │   └── toggle-pane.yazi
+    │       ├── LICENSE
+    │       ├── README.md
+    │       └── main.lua
+    ├── theme.toml
+    └── yazi.toml
+
+39 directories, 123 files
