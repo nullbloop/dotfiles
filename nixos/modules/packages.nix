@@ -1,13 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # ── CLI & shell ──────────────────────────────────────────────
-    git curl wget unzip zip 7zz
+    git curl wget unzip zip _7zz
     ripgrep fd fzf bat jq yq-go tree glow
     htop btop duf fastfetch
     starship zoxide tealdeer translate-shell
     tmux
-    pciutils usbutils dmidecode lm_sensors nvtop acpi brightnessctl ddcutil iw
+    pciutils usbutils dmidecode lm_sensors nvtopPackages.full acpi brightnessctl ddcutil iw
     socat inotify-tools psmisc
 
     # ── Dev ──────────────────────────────────────────────────────
@@ -17,12 +17,14 @@
     jdk jdk17 jdk21
     typst taplo ruff shfmt cppcheck eslint
     android-tools scrcpy
-    luarocks lua5_4
-
+    luarocks lua5_4 lua-language-server
+    nixd
+    nixfmt-rfc-style
     # ── Media ────────────────────────────────────────────────────
-    mpv imv zathura
+    mpv imv zathura stremio-linux-shell
     obs-studio wf-recorder gpu-screen-recorder
     ffmpeg imagemagick mediainfo ffmpegthumbnailer
+	kdePackages.kolourpaint
 
     # ── Hyprland / Wayland / Noctalia ────────────────────────────
     hyprpicker hypridle hyprlock hyprpolkitagent
@@ -30,26 +32,18 @@
     wl-clipboard cliphist wl-clip-persist
     wlsunset wl-gammarelay-rs
     wayland-utils wev xwayland-satellite
-    quickshell matugen  # For Noctalia shell
+    quickshell matugen  wayvnc
     playerctl pamixer
     awww
-    cava
-    kdeconnect
+    cava noctalia 
 
-    # ── Browsers / chat / comms ──────────────────────────────────
-    firefox zen-browser
-    equibop  # <-- Equibop instead of Vesktop
+    # ── Browsers / chat / comms ────────────────────────────────── 
+    equibop karere
     thunderbird
-    bitwarden
-
-    # ── Gaming ───────────────────────────────────────────────────
-    steam-run gamescope mangohud vkbasalt
-    prismlauncher heroic
+    bitwarden-desktop  
 
     # ── File managers / misc GUI ─────────────────────────────────
     kitty
-    thunar
-    kdePackages.dolphin
     xdg-utils
 
     # ── Office / media apps ──────────────────────────────────────
@@ -59,13 +53,14 @@
 
     # ── ASUS / hardware ──────────────────────────────────────────
     asusctl supergfxctl
-    tlp
+    tlp pavucontrol blueman
+	mission-center qalculate-qt
+	gvfs 
 
     # ── Security / alt ───────────────────────────────────────────
     gnupg
+
+	nwg-look qt6Packages.qt6ct papirus-icon-theme adw-gtk3 easyeffects
   ];
 
-  programs.adb.enable = true;
-  programs.steam.enable = true;
-  programs.gamemode.enable = true;
-}
+  }

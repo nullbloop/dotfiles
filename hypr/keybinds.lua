@@ -36,7 +36,7 @@ hl.bind("SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m window --clipboard-only"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty -e yazi"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("zen-browser"))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("zen-beta"))
 
 -- Focus navigation
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))

@@ -15,10 +15,10 @@ x-scheme-handler/webcals=userapp-Thunderbird-QLAPW3.desktop
 text/calendar=userapp-Thunderbird-QLAPW3.desktop
 application/x-extension-ics=userapp-Thunderbird-QLAPW3.desktop
 x-scheme-handler/net.thunderbird=userapp-Thunderbird-IULLW3.desktop
-x-scheme-handler/http=zen.desktop
-x-scheme-handler/https=zen.desktop
+x-scheme-handler/http=zen-beta.desktop
+x-scheme-handler/https=zen-beta.desktop
 x-scheme-handler/chrome=zen.desktop
-text/html=zen.desktop
+text/html=zen-beta.desktop
 application/x-extension-htm=zen.desktop
 application/x-extension-html=zen.desktop
 application/x-extension-shtml=zen.desktop
@@ -28,6 +28,8 @@ application/x-extension-xht=zen.desktop
 inode/directory=yazi.desktop
 application/pdf=onlyoffice-desktopeditors.desktop
 x-scheme-handler/stremio=stremio-enhanced.desktop
+x-scheme-handler/about=zen-beta.desktop
+x-scheme-handler/unknown=zen-beta.desktop
 
 [Added Associations]
 x-scheme-handler/mailto=userapp-Thunderbird-904NW3.desktop;

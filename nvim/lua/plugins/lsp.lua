@@ -6,7 +6,8 @@ return {
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
 			ensure_installed = {
-				"lua_ls", "pyright", "ts_ls", "clangd", "jdtls",
+				-- Removed "lua_ls" so Mason doesn't download the broken binary
+				"pyright", "ts_ls", "clangd", "jdtls",
 				"bashls", "html", "cssls", "jsonls", "yamlls", "taplo", "tinymist",
 			},
 			automatic_installation = false,
@@ -20,13 +21,19 @@ return {
 		opts = { ensure_installed = {}, run_on_start = true },
 	},
 
-	{
+		{
 		"neovim/nvim-lspconfig",
 		dependencies = { "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" },
 		config = function()
 			vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+            
+            -- Override the default command for lua_ls to use the Nix binary
+            vim.lsp.config('lua_ls', {
+                cmd = { 'lua-language-server' },
+            })
+
 			vim.lsp.enable({
-				"lua_ls", "pyright", "ts_ls", "clangd",
+				"lua_ls", "nixd", "pyright", "ts_ls", "clangd",
 				"bashls", "html", "cssls", "jsonls", "yamlls", "taplo", "tinymist",
 			})
 		end,
@@ -43,7 +50,9 @@ return {
 		config = function()
 			local jdtls = require("jdtls")
 			local mason = vim.fn.stdpath("data") .. "/mason"
-			local java_home = "/usr/lib/jvm/java-27-openjdk"
+            
+            -- NixOS Fix: Use Nix's JDK path instead of Arch's
+			local java_home = "/run/current-system/sw/lib/openjdk" 
 
 			local root = vim.fs.root(0, { ".git" }) or vim.fn.getcwd()
 			local workspace = vim.fn.stdpath("cache")
@@ -61,7 +70,6 @@ return {
 				and { 
 					sourcePaths = { "erp-app/src", "erp-core/src" }, 
 					outputPath = workspace .. "/target/classes",
-					-- THE FIX: Wrap the list in an "include" table
 					referencedLibraries = { include = jars }
 				}
 				or nil
