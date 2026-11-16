@@ -10,7 +10,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
   };
 
   # 3. Security & Keyring
@@ -91,8 +90,15 @@
     GTK_THEME = "adw-gtk3-dark";
     QT_STYLE_OVERRIDE = "adwaita-dark";
     QT_QPA_PLATFORMTHEME = "gtk3";
+    GTK_IM_MODULE = "ibus";
+    QT_IM_MODULE = "ibus";
+    XMODIFIERS = "@im=ibus";
   };
-
+  # Enable IBus via the unified input method module
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+  };
   # 9. Ensure Yazi is available system-wide
   environment.systemPackages = with pkgs; [ yazi ];
 }

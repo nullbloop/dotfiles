@@ -1,6 +1,14 @@
-{ config, pkgs, lib, ... }:
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   # Locale (en_US with Lisbon time; adjust LC_* if you prefer pt_PT)
@@ -21,7 +29,10 @@
   # Network
   networking.networkmanager = {
     enable = true;
-    plugins = with pkgs; [ networkmanager-openvpn networkmanager-openconnect ];
+    plugins = with pkgs; [
+      networkmanager-openvpn
+      networkmanager-openconnect
+    ];
   };
   networking.firewall = {
     enable = true;
@@ -44,7 +55,11 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-    publish = { enable = true; userServices = true; addresses = true; };
+    settings.publish = {
+      publish-addresses = true;
+      disable-publishing = false;
+      disable-user-service-publishing = false;
+    };
   };
 
   services.tailscale.enable = true;
@@ -54,8 +69,16 @@
     isNormalUser = true;
     description = "npc";
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "input" "libvirtd" "seat" ];
-    initialPassword = "changeme";  # change with `passwd` after first boot
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "audio"
+      "input"
+      "libvirtd"
+      "seat"
+    ];
+    initialPassword = "changeme"; # change with `passwd` after first boot
   };
 
   programs.fish.enable = true;

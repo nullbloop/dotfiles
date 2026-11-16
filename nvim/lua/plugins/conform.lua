@@ -35,7 +35,7 @@ return {
 			java = { "clang_format" },
 			c = { "clang_format" },
 			cpp = { "clang_format" },
-			nix = { "nixfmt-rfc-style" },
+			nix = { "nixfmt" },
 		},
 		formatters = {
 			prettier = {
