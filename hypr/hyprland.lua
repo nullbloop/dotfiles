@@ -119,7 +119,7 @@ hl.on("hyprland.start", function()
 
 	-- WiFi powersave off
 	hl.exec_cmd("sh -c 'iw dev wlp3s0 set power_save off'")
-	hl.exec_once("gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'")
+	hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'")
 end)
 
 
