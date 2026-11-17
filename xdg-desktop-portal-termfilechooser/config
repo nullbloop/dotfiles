@@ -1,5 +1,7 @@
 [filechooser]
-cmd=yazi-wrapper.sh
+env=PATH=/run/current-system/sw/bin
+cmd=/home/npc/.config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
 default_dir=$HOME
+env=TERMCMD=kitty -e
 open_mode=suggested
 save_mode=last

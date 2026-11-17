@@ -1,5 +1,18 @@
 { pkgs, lib, ... }:
-
+let
+  yaziDesktop = pkgs.makeDesktopItem {
+    name = "yazi";
+    desktopName = "Yazi";
+    comment = "Blazing fast terminal file manager";
+    exec = "${pkgs.kitty}/bin/kitty -e ${pkgs.yazi}/bin/yazi %u";
+    terminal = false;
+    mimeTypes = [ "inode/directory" ];
+    categories = [
+      "Utility"
+      "FileManager"
+    ];
+  };
+in
 {
   # 1. Login Manager
   services.displayManager.ly.enable = true;
@@ -19,16 +32,18 @@
   # 4. Input
   services.libinput.enable = true;
 
-  # 5. Yazi File Chooser Portal
+  # 5. Yazi File Chooser Portal (Single source of truth)
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-termfilechooser
+      xdg-desktop-portal-gtk
     ];
 
     config = {
       common = {
+        default = [ "gtk" ];
         "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
       };
       hyprland = {
@@ -41,51 +56,20 @@
     };
   };
 
-  environment.etc."xdg/xdg-desktop-portal-termfilechooser/config".text =
-    let
-      yaziDeps = pkgs.buildEnv {
-        name = "yazi-portal-deps";
-        paths = with pkgs; [
-          yazi
-          gnused
-          bashInteractive
-        ];
-      };
-    in
-    ''
-      [filechooser]
-      env=PATH=${yaziDeps}/bin:/run/current-system/sw/bin
-      cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
-      default_dir=$HOME
-      env=TERMCMD=${pkgs.kitty}/bin/kitty -T "filechooser" -e
-      open_mode=suggested
-      save_mode=last
-    '';
-
-  # 6. Manually create the .desktop entry for Yazi
-  environment.etc."xdg/applications/yazi.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Name=Yazi
-    Comment=Blazing fast terminal file manager
-    Exec=kitty -e yazi %u
-    Terminal=false
-    MimeType=inode/directory;
-    Categories=Utility;FileManager;
-  '';
-
-  # 7. MIME Associations (Zen Browser & Yazi)
-  xdg.mime.enable = true;
-  xdg.mime.defaultApplications = {
-    "text/html" = lib.mkForce "zen-beta.desktop";
-    "x-scheme-handler/http" = lib.mkForce "zen-beta.desktop";
-    "x-scheme-handler/https" = lib.mkForce "zen-beta.desktop";
-    "x-scheme-handler/about" = lib.mkForce "zen-beta.desktop";
-    "x-scheme-handler/unknown" = lib.mkForce "zen-beta.desktop";
-    "inode/directory" = "yazi.desktop";
+  # 6. MIME Associations (Zen Browser & Yazi)
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = lib.mkForce "zen-beta.desktop";
+      "x-scheme-handler/http" = lib.mkForce "zen-beta.desktop";
+      "x-scheme-handler/https" = lib.mkForce "zen-beta.desktop";
+      "x-scheme-handler/about" = lib.mkForce "zen-beta.desktop";
+      "x-scheme-handler/unknown" = lib.mkForce "zen-beta.desktop";
+      "inode/directory" = lib.mkForce "yazi.desktop";
+    };
   };
 
-  # 8. Dark Mode Force (GTK & Qt)
+  # 7. Dark Mode Force (GTK & Qt)
   environment.sessionVariables = {
     GTK_THEME = "adw-gtk3-dark";
     QT_STYLE_OVERRIDE = "adwaita-dark";
@@ -94,11 +78,15 @@
     QT_IM_MODULE = "ibus";
     XMODIFIERS = "@im=ibus";
   };
-  # Enable IBus via the unified input method module
+
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
   };
-  # 9. Ensure Yazi is available system-wide
-  environment.systemPackages = with pkgs; [ yazi ];
+
+  # 8. Install Yazi and its .desktop entry into /run/current-system/sw/share/applications
+  environment.systemPackages = with pkgs; [
+    yazi
+    yaziDesktop
+  ];
 }

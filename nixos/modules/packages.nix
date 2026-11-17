@@ -2,7 +2,11 @@
 {
   environment.systemPackages = with pkgs; [
     # ── CLI & shell ──────────────────────────────────────────────
+    bashInteractive
+    coreutils
+    findutils
     git
+    file
     curl
     wget
     unzip
@@ -38,6 +42,12 @@
     inotify-tools
     psmisc
     ibus
+    zsh
+    gnugrep
+    gnused
+    gawk
+    bc
+    util-linux
 
     # ── Dev ──────────────────────────────────────────────────────
     neovim
@@ -55,9 +65,8 @@
     cmake
     gdb
     valgrind
-    jdk
-    jdk17
     jdk21
+    jdt-language-server
     typst
     taplo
     ruff
@@ -71,6 +80,7 @@
     lua-language-server
     nixd
     nixfmt
+
     # ── Media ────────────────────────────────────────────────────
     mpv
     imv
@@ -146,5 +156,4 @@
     adw-gtk3
     easyeffects
   ];
-
 }
